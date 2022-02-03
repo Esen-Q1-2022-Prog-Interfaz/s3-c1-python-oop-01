@@ -1,5 +1,5 @@
 from task import Task
-from db import insertTask
+from db import insertTask, getAllTasks, updateFinishTaskById, getTaskById
 
 
 class TodoListApp:
@@ -7,7 +7,8 @@ class TodoListApp:
         print("iniciando la instancia...")
         self.menuItems = {
             " 0": "tarea nueva",
-            " 1": "terminar tarea",
+            " 1": "mostrar todas las tareas",
+            " 2": "terminar tarea",
             "-1": "exit",
         }
 
@@ -19,6 +20,10 @@ class TodoListApp:
                 break
             elif option == 0:
                 self.createNewTask()
+            elif option == 1:
+                self.showAllTasks()
+            elif option == 2:
+                self.finishTaskById()
             else:
                 print("la aplicacion continua...")
 
@@ -35,3 +40,21 @@ class TodoListApp:
         description = input("description: ")
         newTask = Task(description)
         insertTask(newTask)
+
+    def showAllTasks(self):
+        print()
+        print()
+        """ lista de diccionarios """
+        taskList = getAllTasks()
+        for task in taskList:
+            print(task)
+
+    def finishTaskById(self):
+        print()
+        print()
+        id = int(input("id: "))
+        updateFinishTaskById(id)
+        finishedTask = getTaskById(id)
+        print()
+        print()
+        print(finishedTask)
