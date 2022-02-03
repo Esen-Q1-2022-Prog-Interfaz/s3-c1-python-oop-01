@@ -4,7 +4,7 @@ import pymysql.cursors
 
 def createConnectionToDB():
     connection = pymysql.connect(
-        host="localhost",
+        host="localhost",  # 127.0.0.1
         user="root",
         password="root",
         database="todolistdb",
