@@ -1,5 +1,5 @@
 from task import Task
-from db import insertTask, getAllTasks, updateFinishTaskById, getTaskById
+from db import insertTask, getAllTasks, updateFinishTaskById, getTaskById, getPendingTasks
 
 
 class TodoListApp:
@@ -7,8 +7,9 @@ class TodoListApp:
         print("iniciando la instancia...")
         self.menuItems = {
             " 0": "tarea nueva",
-            " 1": "mostrar todas las tareas",
-            " 2": "terminar tarea",
+            " 1": "mostrar todas las tareas no terminadas",
+            " 2": "mostrar todas las tareas",
+            " 3": "terminar tarea",
             "-1": "exit",
         }
 
@@ -21,8 +22,10 @@ class TodoListApp:
             elif option == 0:
                 self.createNewTask()
             elif option == 1:
-                self.showAllTasks()
+                self.showPendingTasks()
             elif option == 2:
+                self.showAllTasks()
+            elif option == 3:
                 self.finishTaskById()
             else:
                 print("la aplicacion continua...")
@@ -58,3 +61,10 @@ class TodoListApp:
         print()
         print()
         print(finishedTask)
+
+    def showPendingTasks(self):
+        print()
+        print()
+        pendingTaskList = getPendingTasks()
+        for task in pendingTaskList:
+            print(task)

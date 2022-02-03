@@ -55,3 +55,14 @@ def getTaskById(id) -> dict:
             cursor.execute(sql, data)
             result = cursor.fetchone()
     return result
+
+
+def getPendingTasks() -> list:
+    connection = createConnectionToDB()
+    result = []
+    with connection:
+        with connection.cursor() as cursor:
+            sql = "SELECT `tasks`.`id`, `tasks`.`description`, `tasks`.`is_finished` FROM `todolistdb`.`tasks` where `tasks`.`is_finished` = 0;"
+            cursor.execute(sql)
+            result = cursor.fetchall()
+    return result
